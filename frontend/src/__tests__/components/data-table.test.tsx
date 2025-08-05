@@ -40,7 +40,7 @@ describe("DataTable Component", () => {
     render(<DataTable tableId="test-table" columns={columns} data={[]} isLoading={true} />);
 
     // Check if loading indicator is present
-    expect(screen.getByRole("row")).toBeInTheDocument();
+    expect(screen.getByRole("status")).toBeInTheDocument();
   });
 
   it("shows error state", () => {

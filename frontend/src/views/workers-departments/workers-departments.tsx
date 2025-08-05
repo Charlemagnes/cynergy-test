@@ -6,7 +6,11 @@ import { DataTable } from "@/components/data-table/data-table";
 import DataTableFilters, { DataTableGlobalSearchFilter } from "@/components/data-table/data-table-filters";
 
 export const WorkersView = () => {
-  const { isPending: isPending, data: workersAndDepartments } = useQuery({
+  const {
+    isPending: isPending,
+    data: workersAndDepartments,
+    error: fetchingError,
+  } = useQuery({
     queryKey: ["workers-departments"],
     queryFn: async () => {
       const result = await getWorkersWithDepartments();
@@ -26,6 +30,7 @@ export const WorkersView = () => {
           tableId="workers-departments"
           columns={workerDepartmentColumns}
           data={workersAndDepartments ?? []}
+          error={fetchingError}
           isLoading={isPending}
           filters={
             <DataTableFilters>

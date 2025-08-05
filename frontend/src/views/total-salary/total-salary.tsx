@@ -6,7 +6,11 @@ import { useQuery } from "@tanstack/react-query";
 import { totalSalaryColumns } from "./table-col-defs";
 
 export const TotalSalaryView = () => {
-  const { isPending: isPending, data: workers } = useQuery({
+  const {
+    isPending: isPending,
+    data: workers,
+    error: fetchingError,
+  } = useQuery({
     queryKey: ["workers-total-salary"],
     queryFn: async () => {
       const result = await getTotalSalaries();
@@ -28,6 +32,7 @@ export const TotalSalaryView = () => {
           tableId="workers-salary"
           columns={totalSalaryColumns}
           data={workers ?? []}
+          error={fetchingError}
           isLoading={isPending}
           filters={
             <DataTableFilters>

@@ -56,19 +56,19 @@ describe("AnnualSalaryView Component", () => {
     );
 
     // Check if title and description are rendered
-    expect(screen.getByText("Annual Salary")).toBeInTheDocument();
-    expect(screen.getByText("List of workers with their annual salary")).toBeInTheDocument();
+    expect(screen.getByText("Annual Salary Report")).toBeInTheDocument();
+    expect(screen.getByText("Annual salary breakdown by worker and department")).toBeInTheDocument();
 
     // Wait for data to be loaded
     await screen.findByText(/John/);
 
     // Check if annual salary data is formatted correctly
-    expect(screen.getByText("$60,000")).toBeInTheDocument();
-    expect(screen.getByText("$72,000")).toBeInTheDocument();
+    expect(screen.getByText("$60,000.00")).toBeInTheDocument();
+    expect(screen.getByText("$72,000.00")).toBeInTheDocument();
     expect(screen.getByText(/Doe/)).toBeInTheDocument();
     expect(screen.getByText(/Smith/)).toBeInTheDocument();
-    expect(screen.getByText("IT")).toBeInTheDocument();
     expect(screen.getByText("HR")).toBeInTheDocument();
+    expect(screen.getByText("IT")).toBeInTheDocument();
   });
 
   it("shows loading state", () => {

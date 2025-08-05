@@ -161,7 +161,7 @@ export const DataTable = forwardRef<TanstackTable<any>, DataTableProps<any, any>
               ) : isLoading ? (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-24 text-center">
-                    <Loader2 className="mx-auto h-16 w-16 animate-spin text-foreground" />
+                    <Loader2 role="status" className="mx-auto h-16 w-16 animate-spin text-foreground" />
                   </TableCell>
                 </TableRow>
               ) : (

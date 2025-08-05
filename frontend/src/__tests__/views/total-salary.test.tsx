@@ -7,7 +7,7 @@ import { WorkerSalary } from "@/types/workers";
 
 // Mock the API call
 vi.mock("@/lib/api-calls", () => ({
-  getTotalSalary: vi.fn(),
+  getTotalSalaries: vi.fn(),
 }));
 
 describe("TotalSalaryView Component", () => {
@@ -54,15 +54,15 @@ describe("TotalSalaryView Component", () => {
     );
 
     // Check if title and description are rendered
-    expect(screen.getByText("Total Salary")).toBeInTheDocument();
-    expect(screen.getByText("List of workers with their total salary")).toBeInTheDocument();
+    expect(screen.getByText("Total Salary Overview")).toBeInTheDocument();
+    expect(screen.getByText("Combined monthly salary of all workers")).toBeInTheDocument();
 
     // Wait for data to be loaded
     await screen.findByText(/John/);
 
     // Check if salary data is formatted correctly
-    expect(screen.getByText("$50,000")).toBeInTheDocument();
-    expect(screen.getByText("$60,000")).toBeInTheDocument();
+    expect(screen.getByText("$50,000.00")).toBeInTheDocument();
+    expect(screen.getByText("$60,000.00")).toBeInTheDocument();
     expect(screen.getByText(/Doe/)).toBeInTheDocument();
     expect(screen.getByText(/Smith/)).toBeInTheDocument();
   });
