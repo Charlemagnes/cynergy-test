@@ -15,8 +15,9 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Loader2 } from "lucide-react";
 import { rankItem } from "@tanstack/match-sorter-utils";
-import { createContext, useContext, useEffect, useState, type ReactNode, forwardRef, useImperativeHandle } from "react";
+import { createContext, useContext, useState, type ReactNode, forwardRef, useImperativeHandle } from "react";
 import { Table as TanstackTable, type Row } from "@tanstack/table-core";
+import { DataTableFilterGroup } from "./data-table-filters";
 
 interface DataTableProps<TData, TValue> {
   tableId: string;
@@ -27,6 +28,7 @@ interface DataTableProps<TData, TValue> {
   error?: Error | null;
   rowOnClick?: (row: TData | null) => void;
   multipleSelection?: boolean;
+  footer?: ReactNode;
 }
 
 export type CustomColumnDef<TData, TValue = unknown> = ColumnDef<TData, TValue> & {
@@ -60,7 +62,7 @@ interface DataTableContextType {
 export const DataTableContext = createContext<DataTableContextType | undefined>(undefined);
 
 export const DataTable = forwardRef<TanstackTable<any>, DataTableProps<any, any>>(
-  ({ tableId, columns, data, isLoading, filters, error, rowOnClick, multipleSelection = false }, ref) => {
+  ({ tableId, columns, data, isLoading, filters, error, rowOnClick, multipleSelection = false, footer }, ref) => {
     // const { globalFilter, setGlobalFilter, columnFilters, setColumnFilters } = useDataTable();
     const [globalFilter, setGlobalFilter] = useState("");
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -172,6 +174,8 @@ export const DataTable = forwardRef<TanstackTable<any>, DataTableProps<any, any>
           <Separator orientation="horizontal" className="dark:bg-white" />
 
           <div className="flex items-center justify-end space-x-2 rounded-sm border p-4 dark:border-white">
+            {/* will have to think of a better way to space footer items but i'll do some quick shit */}
+            <div className="flex flex-wrap items-center pr-12">{footer}</div>
             <Button
               variant="outline"
               size="sm"
