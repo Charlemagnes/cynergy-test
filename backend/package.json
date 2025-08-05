@@ -10,7 +10,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "dev2": "node --watch-path ./ --loader ts-node/esm ./src/index.ts"
   },
   "dependencies": {
     "@types/oracledb": "^6.9.0",

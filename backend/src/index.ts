@@ -20,9 +20,7 @@ server.listen(environment.port, () => {
 sequelize
   .authenticate()
   .then(async () => {
-    console.log(
-      "Connection to Oracle database has been established successfully."
-    );
+    console.log("Connection to Oracle database has been established successfully.");
   })
   .catch((err) => {
     console.error("Unable to connect to the Oracle database:", err);

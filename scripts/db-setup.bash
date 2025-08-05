@@ -13,7 +13,6 @@
 IMAGE_NAME="container-registry.oracle.com/database/express:latest"
 CONTAINER_NAME="oracle-xe"
 PORT_MAPPING="1521:1521"
-DEFAULT_DATA_PATH="$(pwd)/oracle_data"
 
 echo "--- Oracle Database XE Docker Setup ---"
 echo "This script will download and run the official Oracle Database XE container."
@@ -52,22 +51,6 @@ while true; do
     fi
 done
 
-# --- Step 3: Get user input for persistent data path ---
-read -p "Enter a local path for database files (press Enter for default: '$DEFAULT_DATA_PATH'): " data_path
-if [[ -z "$data_path" ]]; then
-    data_path="$DEFAULT_DATA_PATH"
-fi
-
-# Create the data directory if it doesn't exist
-mkdir -p "$data_path"
-if [[ $? -ne 0 ]]; then
-    echo "Error: Could not create directory at '$data_path'. Check permissions."
-    exit 1
-fi
-
-echo "Database data will be stored persistently in: '$data_path'"
-echo ""
-
 # --- Step 4: Pull the Docker image ---
 echo "Pulling Docker image '$IMAGE_NAME'..."
 docker pull "$IMAGE_NAME"
@@ -99,7 +82,6 @@ docker run \
   --name "$CONTAINER_NAME" \
   -p "$PORT_MAPPING" \
   -e ORACLE_PWD="$password" \
-  -v "$data_path":/opt/oracle/oradata \
   "$IMAGE_NAME"
 
 echo "showing the password for dev purposses $password"
@@ -114,7 +96,6 @@ echo "--- Setup Complete! ---"
 echo "Oracle Database XE is now running in a Docker container."
 echo "  - Container Name: '$CONTAINER_NAME'"
 echo "  - Port Mapping:   '$PORT_MAPPING' (connect to localhost:1521)"
-echo "  - Persistent Data: '$data_path'"
 echo "  - Users:          SYS, SYSTEM, PDBADMIN"
 echo ""
 echo "The database will take a few minutes to initialize. You can check its status with:"
