@@ -56,6 +56,8 @@ CREATE OR REPLACE PACKAGE BODY workers_pkg AS
                 w.WORKER_ID, 
                 w.FIRST_NAME, 
                 w.LAST_NAME, 
+                w.EMAIL,
+                w.HIRE_DATE,
                 NVL(d.department_name, 'n/a') as "DEPARTMENT_NAME", 
                 w.salary * 12 as annual_salary
             FROM WORKERS w
@@ -66,6 +68,8 @@ CREATE OR REPLACE PACKAGE BODY workers_pkg AS
                 rec.WORKER_ID,
                 rec.FIRST_NAME,
                 rec.LAST_NAME,
+                rec.EMAIL,
+                rec.HIRE_DATE,
                 rec.DEPARTMENT_NAME,
                 rec.ANNUAL_SALARY
             ));
