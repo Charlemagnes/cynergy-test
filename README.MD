@@ -27,12 +27,7 @@ Run the following scripts in the `/scripts` folder **in order**:
 **How to run:**
 
 - For `.bash` scripts: `bash db-setup.bash`
-- For `.sql` scripts: Use your Oracle SQL client, e.g.:
-  ```bash
-  sqlplus <user>/<password>@<connection_string> @test-cynexe.sql
-  sqlplus <user>/<password>@<connection_string> @custom-types.sql
-  sqlplus <user>/<password>@<connection_string> @workers-pkg.sql
-  ```
+- For `.sql` scripts: Use your Oracle SQL client.
 
 ### 2. Install Dependencies
 
