@@ -16,7 +16,7 @@ export const TotalSalaryView = () => {
     },
   });
 
-  // const totalSalary = workers?.reduce((sum, worker) => sum + worker.salary, 0);
+  const totalSalary = workers?.reduce((sum, worker) => sum + worker.salary, 0);
 
   return (
     <Card>
@@ -34,6 +34,16 @@ export const TotalSalaryView = () => {
             <DataTableFilters>
               <DataTableGlobalSearchFilter placeholder="Search Workers..." />
             </DataTableFilters>
+          }
+          footer={
+            <>
+              <span>
+                Total Worker Salary:{" "}
+                <strong>
+                  {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(totalSalary ?? 0)}
+                </strong>
+              </span>
+            </>
           }
         />
       </CardContent>
