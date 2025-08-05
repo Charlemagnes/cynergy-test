@@ -1,8 +1,21 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { getWorkersWithDepartments } from "@/lib/api-calls";
+import { workerDepartmentColumns } from "./table-col-defs";
+import { DataTable } from "@/components/data-table/data-table";
+import DataTableFilters, { DataTableGlobalSearchFilter } from "@/components/data-table/data-table-filters";
 
 export const WorkersView = () => {
+  const queryClient = useQueryClient();
+  const { isPending: isPending, data: workersAndDepartments } = useQuery({
+    queryKey: ["workers-departments"],
+    queryFn: async () => {
+      const result = await getWorkersWithDepartments();
+      console.log(result);
+      return result;
+    },
+  });
+
   return (
     <Card>
       <CardHeader>
@@ -10,26 +23,17 @@ export const WorkersView = () => {
         <CardDescription>Complete list of workers with their departments</CardDescription>
       </CardHeader>
       <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Department</TableHead>
-              <TableHead>Monthly Salary</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {workersWithDepartments.map((worker) => (
-              <TableRow key={worker.id}>
-                <TableCell className="font-medium">{worker.name}</TableCell>
-                <TableCell>
-                  <Badge variant="secondary">{worker.departmentName}</Badge>
-                </TableCell>
-                <TableCell>${worker.monthlySalary.toLocaleString()}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+        <DataTable
+          tableId="workers-departments"
+          columns={workerDepartmentColumns}
+          data={workersAndDepartments ?? []}
+          isLoading={isPending}
+          filters={
+            <DataTableFilters>
+              <DataTableGlobalSearchFilter placeholder="Search Workers..." />
+            </DataTableFilters>
+          }
+        />
       </CardContent>
     </Card>
   );

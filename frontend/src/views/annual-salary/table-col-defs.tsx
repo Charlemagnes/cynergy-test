@@ -1,10 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { WorkerDepartment } from "@/types/workers";
+import { WorkerAnnualSalary } from "@/types/workers";
 import { CommonCell } from "@/components/data-table/common-cell";
 
 const headerClasses = "px-6 py-3 text-left text-xs text-foreground font-medium uppercase tracking-wider";
 
-export const workerDepartmentColumns: ColumnDef<WorkerDepartment>[] = [
+export const annualSalaryColumns: ColumnDef<WorkerAnnualSalary>[] = [
   {
     accessorKey: "worker_id",
     header: () => <div className={headerClasses}>ID</div>,
@@ -56,6 +56,17 @@ export const workerDepartmentColumns: ColumnDef<WorkerDepartment>[] = [
     cell: ({ row }) => (
       <CommonCell>
         <span className="text-sm font-medium">{row.getValue("department_name")}</span>
+      </CommonCell>
+    ),
+  },
+  {
+    accessorKey: "annual_salary",
+    header: () => <div className={headerClasses}>Annual Salary</div>,
+    cell: ({ row }) => (
+      <CommonCell>
+        <span className="text-sm font-medium">
+          {new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(row.getValue("annual_salary"))}
+        </span>
       </CommonCell>
     ),
   },

@@ -1,8 +1,20 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
+import { DataTable } from "@/components/data-table/data-table";
+import DataTableFilters, { DataTableGlobalSearchFilter } from "@/components/data-table/data-table-filters";
+import { getWorkersWithDepartments } from "@/lib/api-calls";
+import { useQueryClient, useQuery } from "@tanstack/react-query";
+import { annualSalaryColumns } from "./table-col-defs";
 
 export const AnnualSalaryView = () => {
+  const queryClient = useQueryClient();
+  const { isPending: isPending, data: workersAndDepartments } = useQuery({
+    queryKey: ["workers-annual-salary"],
+    queryFn: async () => {
+      const result = await getWorkersWithDepartments();
+      console.log(result);
+      return result;
+    },
+  });
   return (
     <Card>
       <CardHeader>
@@ -10,32 +22,17 @@ export const AnnualSalaryView = () => {
         <CardDescription>Annual salary breakdown by worker and department</CardDescription>
       </CardHeader>
       <CardContent>
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Department</TableHead>
-              <TableHead>Monthly Salary</TableHead>
-              <TableHead>Annual Salary</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {workersWithAnnualSalary
-              .sort((a, b) => b.annualSalary - a.annualSalary)
-              .map((worker) => (
-                <TableRow key={worker.id}>
-                  <TableCell className="font-medium">{worker.name}</TableCell>
-                  <TableCell>
-                    <Badge variant="secondary">{worker.departmentName}</Badge>
-                  </TableCell>
-                  <TableCell>${worker.monthlySalary.toLocaleString()}</TableCell>
-                  <TableCell className="font-semibold text-green-600">
-                    ${worker.annualSalary.toLocaleString()}
-                  </TableCell>
-                </TableRow>
-              ))}
-          </TableBody>
-        </Table>
+        <DataTable
+          tableId="workers-annual-salary"
+          columns={annualSalaryColumns}
+          data={workersAndDepartments ?? []}
+          isLoading={isPending}
+          filters={
+            <DataTableFilters>
+              <DataTableGlobalSearchFilter placeholder="Search Workers..." />
+            </DataTableFilters>
+          }
+        />
       </CardContent>
     </Card>
   );
