@@ -59,11 +59,11 @@ Copy the provided `.env.example` files to `.env` in both `/backend` and `/fronte
 
 ### 4. Running the Project
 
-```bash
-npm run dev
-```
+- ```bash
+  npm run dev
+  ```
 
-**OR**
+  **OR**
 
 - **Backend (development):**
   ```bash
