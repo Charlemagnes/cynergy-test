@@ -2,16 +2,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { DataTable } from "@/components/data-table/data-table";
 import DataTableFilters, { DataTableGlobalSearchFilter } from "@/components/data-table/data-table-filters";
 import { getAnnualSalaries } from "@/lib/api-calls";
-import { useQueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { annualSalaryColumns } from "./table-col-defs";
 
 export const AnnualSalaryView = () => {
-  const queryClient = useQueryClient();
   const { isPending: isPending, data: workersAndDepartments } = useQuery({
     queryKey: ["workers-annual-salary"],
     queryFn: async () => {
       const result = await getAnnualSalaries();
-      console.log(result);
+      // console.log(result);
       return result;
     },
   });

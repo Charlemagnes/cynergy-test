@@ -11,13 +11,11 @@ import {
 } from "@tanstack/react-table";
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Loader2 } from "lucide-react";
 import { rankItem } from "@tanstack/match-sorter-utils";
 import { createContext, useContext, useState, type ReactNode, forwardRef, useImperativeHandle } from "react";
 import { Table as TanstackTable, type Row } from "@tanstack/table-core";
-import { DataTableFilterGroup } from "./data-table-filters";
 
 interface DataTableProps<TData, TValue> {
   tableId: string;
@@ -176,7 +174,7 @@ export const DataTable = forwardRef<TanstackTable<any>, DataTableProps<any, any>
           <div className="flex items-center justify-end space-x-2 rounded-sm border p-4 dark:border-white">
             {/* will have to think of a better way to space footer items but i'll do some quick shit */}
             <div className="flex flex-wrap items-center pr-12">{footer}</div>
-            <Button
+            {/* <Button
               variant="outline"
               size="sm"
               onClick={() => table.previousPage()}
@@ -188,7 +186,7 @@ export const DataTable = forwardRef<TanstackTable<any>, DataTableProps<any, any>
 
             <Button variant="outline" size="sm" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
               Next
-            </Button>
+            </Button> */}
           </div>
         </div>
       </DataTableContext.Provider>

@@ -2,10 +2,11 @@
 
 import type React from "react";
 
-import { Filter, Search, CalendarIcon } from "lucide-react";
+import { Filter, Search } from "lucide-react";
 import { useDataTable } from "./data-table";
-import { useCallback, useEffect, useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { DebouncedInput } from "../ui/debounced-input";
+// import { useCallback, useEffect, useState, type ReactNode } from "react";
 // import { Calendar } from '@/components/ui/calendar';
 // import type { DateRange } from 'react-day-picker';
 // import { format } from 'date-fns';
@@ -253,14 +254,14 @@ export function DataTableCalendarFilter({
 */
 
 // Helper function for debounce
-function debounce<T extends (...args: any[]) => any>(func: T, wait: number): (...args: Parameters<T>) => void {
-  let timeout: NodeJS.Timeout | null = null;
+// function debounce<T extends (...args: any[]) => any>(func: T, wait: number): (...args: Parameters<T>) => void {
+//   let timeout: NodeJS.Timeout | null = null;
 
-  return (...args: Parameters<T>) => {
-    if (timeout) clearTimeout(timeout);
-    timeout = setTimeout(() => func(...args), wait);
-  };
-}
+//   return (...args: Parameters<T>) => {
+//     if (timeout) clearTimeout(timeout);
+//     timeout = setTimeout(() => func(...args), wait);
+//   };
+// }
 
 // Container for grouping filter elements
 export function DataTableFilterGroup({ children }: { children: ReactNode }) {

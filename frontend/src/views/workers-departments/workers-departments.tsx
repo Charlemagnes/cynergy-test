@@ -1,17 +1,16 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getWorkersWithDepartments } from "@/lib/api-calls";
 import { workerDepartmentColumns } from "./table-col-defs";
 import { DataTable } from "@/components/data-table/data-table";
 import DataTableFilters, { DataTableGlobalSearchFilter } from "@/components/data-table/data-table-filters";
 
 export const WorkersView = () => {
-  const queryClient = useQueryClient();
   const { isPending: isPending, data: workersAndDepartments } = useQuery({
     queryKey: ["workers-departments"],
     queryFn: async () => {
       const result = await getWorkersWithDepartments();
-      console.log(result);
+      // console.log(result);
       return result;
     },
   });
@@ -19,7 +18,7 @@ export const WorkersView = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>All Workers</CardTitle>
+        <CardTitle>Workers + Departments</CardTitle>
         <CardDescription>Complete list of workers with their departments</CardDescription>
       </CardHeader>
       <CardContent>
