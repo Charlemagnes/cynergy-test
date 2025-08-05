@@ -2,18 +2,15 @@ import "dotenv/config";
 import express from "express";
 import http from "http";
 import bodyParser from "body-parser";
-import cookieParser from "cookie-parser";
-import compression from "compression";
 import cors from "cors";
-import OracleDB from "oracledb";
 import environment from "./env-config.js";
-import Worker from "./models/worker.js";
-import Department from "./models/department.js";
 import sequelize from "./config/database.js";
+import workerRoutes from "./routes/worker.routes.js";
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use("/api/workers", workerRoutes);
 
 const server = http.createServer(app);
 server.listen(environment.port, () => {
