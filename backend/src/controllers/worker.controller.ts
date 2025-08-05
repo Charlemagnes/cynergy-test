@@ -6,7 +6,8 @@ export class WorkerController {
   async getTotalSalary(req: Request, res: Response) {
     try {
       const result = await sequelize.query(
-        "select * from TABLE(workers_pkg.get_workers_annual_salary)",
+        "select * from TABLE(workers_pkg.get_workers)",
+
         { type: QueryTypes.SELECT }
       );
       res.json(result);
@@ -18,10 +19,9 @@ export class WorkerController {
 
   async getWorkersWithDepartments(req: Request, res: Response) {
     try {
-      const result = await sequelize.query(
-        "select * from TABLE(workers_pkg.get_workers_with_departments)",
-        { type: QueryTypes.SELECT }
-      );
+      const result = await sequelize.query("select * from TABLE(workers_pkg.get_workers_with_departments)", {
+        type: QueryTypes.SELECT,
+      });
       res.json(result);
     } catch (error) {
       console.error("Error getting workers with departments:", error);
@@ -31,10 +31,9 @@ export class WorkerController {
 
   async getAnnualSalaries(req: Request, res: Response) {
     try {
-      const result = await sequelize.query(
-        "select * from TABLE(workers_pkg.get_workers)",
-        { type: QueryTypes.SELECT }
-      );
+      const result = await sequelize.query("select * from TABLE(workers_pkg.get_workers_annual_salary)", {
+        type: QueryTypes.SELECT,
+      });
       res.json(result);
     } catch (error) {
       console.error("Error getting annual salaries:", error);

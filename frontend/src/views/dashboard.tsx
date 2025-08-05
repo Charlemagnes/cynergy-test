@@ -38,7 +38,7 @@ export default function Dashboard() {
                 variant={currentView === "workers" ? "default" : "outline"}
                 onClick={() => setCurrentView("workers")}
               >
-                All Workers
+                Workers + Departments
               </Button>
               <Button
                 variant={currentView === "annual" ? "default" : "outline"}

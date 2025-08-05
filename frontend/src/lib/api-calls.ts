@@ -1,7 +1,7 @@
 import { WorkerAnnualSalary, WorkerDepartment, WorkerSalary } from "@/types/workers";
 import { keysToLowercase } from "./utils";
 
-const API_BASE_URL = process.env.API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export async function getTotalSalaries(): Promise<WorkerSalary[]> {
   try {
@@ -10,11 +10,10 @@ export async function getTotalSalaries(): Promise<WorkerSalary[]> {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
     });
     const jsonRes = await response.json();
-    if (jsonRes.ok && jsonRes.success) {
-      return keysToLowercase<WorkerSalary[]>(jsonRes.data);
+    if (response.ok) {
+      return jsonRes.map(keysToLowercase<WorkerSalary>);
     } else {
       throw new Error(jsonRes.success ? "Unknown error" : jsonRes.error.message);
     }
@@ -31,11 +30,10 @@ export async function getWorkersWithDepartments(): Promise<WorkerDepartment[]> {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
     });
     const jsonRes = await response.json();
-    if (jsonRes.ok && jsonRes.success) {
-      return keysToLowercase<WorkerDepartment[]>(jsonRes.data);
+    if (response.ok) {
+      return jsonRes.map(keysToLowercase<WorkerDepartment>);
     } else {
       throw new Error(jsonRes.success ? "Unknown error" : jsonRes.error.message);
     }
@@ -52,11 +50,10 @@ export async function getAnnualSalaries(): Promise<WorkerAnnualSalary[]> {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
     });
     const jsonRes = await response.json();
-    if (jsonRes.ok && jsonRes.success) {
-      return keysToLowercase<WorkerAnnualSalary[]>(jsonRes.data);
+    if (response.ok) {
+      return jsonRes.map(keysToLowercase<WorkerAnnualSalary>);
     } else {
       throw new Error(jsonRes.success ? "Unknown error" : jsonRes.error.message);
     }

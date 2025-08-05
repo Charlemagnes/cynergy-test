@@ -16,7 +16,7 @@ export const TotalSalaryView = () => {
     },
   });
 
-  const totalSalary = workers?.reduce((sum, worker) => sum + worker.salary, 0);
+  // const totalSalary = workers?.reduce((sum, worker) => sum + worker.salary, 0);
 
   return (
     <Card>

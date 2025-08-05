@@ -2,14 +2,14 @@ import { ColumnDef } from "@tanstack/react-table";
 import { WorkerDepartment } from "@/types/workers";
 import { CommonCell } from "@/components/data-table/common-cell";
 
-const headerClasses = "px-6 py-3 text-left text-xs text-foreground font-medium uppercase tracking-wider";
+const headerClasses = "px-6 py-3 text-center text-xs text-foreground font-medium uppercase tracking-wider";
 
 export const workerDepartmentColumns: ColumnDef<WorkerDepartment>[] = [
   {
     accessorKey: "worker_id",
     header: () => <div className={headerClasses}>ID</div>,
     cell: ({ row }) => (
-      <CommonCell>
+      <CommonCell className="text-center">
         <span className="text-sm font-medium">{row.getValue("worker_id")}</span>
       </CommonCell>
     ),

@@ -9,7 +9,7 @@ export const CommonCell = ({
   children: React.ReactNode;
   className?: string;
 }) => (
-  <div className={`whitespace-nowrap ${className ? ` ${className}` : ""}`} onClick={onClick}>
+  <div className={`whitespace-nowrap px-2 ${className ? ` ${className}` : ""}`} onClick={onClick}>
     {children}
   </div>
 );
