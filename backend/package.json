@@ -7,7 +7,9 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "dev": "nodemon"
   },
   "dependencies": {
@@ -27,6 +29,11 @@
   "devDependencies": {
     "@types/compression": "^1.8.1",
     "@types/cookie-parser": "^1.4.9",
-    "@types/cors": "^2.8.19"
+    "@types/cors": "^2.8.19",
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^6.0.3",
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4",
+    "ts-jest": "^29.4.1"
   }
 }
